@@ -23,10 +23,6 @@ function optionChanged(personID) {
     bubbleChart(personID);
     demographics(personID);
     //gaugeChart(personID);
-
-
-    //here is where you would add the other functions, pass in personID
-
 };
 
 function demographics(personID) {
@@ -41,7 +37,6 @@ function demographics(personID) {
 
 function barChart(personID) {
 
-    //var metaData = data.metadata.filter((sample) => sample.id === parseInt(personID))[0];
     var sampleData = jsonData.samples.filter(obj => obj.id.toString() === personID)[0];
 
     //console.log(metaData);
@@ -77,6 +72,7 @@ function barChart(personID) {
     Plotly.newPlot("bar", barData)
 };
 
+
 function bubbleChart(personID) {
 
     //var metaData = jsonData.metadata.filter((sample) => sample.id === parseInt(personID))[0];
@@ -99,11 +95,13 @@ function bubbleChart(personID) {
     var trace1 = {
         x: otuIDs,
         y: sampleValues,
+        text: sampleLables,
         mode: 'markers',
         marker: {
             color: otuIDs,
             // opacity: [1, 0.8, 0.6, 0.4],
             size: sampleValues
+        
         }
     };
 
@@ -117,29 +115,27 @@ function bubbleChart(personID) {
     };
 
     Plotly.newPlot('bubble', data, layout);
+};
+
+function gaugeChart(personID) {
+    var metaData = jsonData.metadata.filter((sample) => sample.id === parseInt(personID))[0];
+    // navigate into json, access wfreq and plug it in to chart
+    // var wfeq = metadata.wfreq;
+    // console.log(wfeq)
+
+    // var data = [
+    //     {
+    //         domain: { x: [0, 1], y: [0, 1] },
+    //         value: 270,
+    //         title: { text: "Speed" },
+    //         type: "indicator",
+    //         mode: "gauge+number"
+    //     }
+    // ];
+
+    // var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+    Plotly.newPlot('gauge', data, layout);
 }
-
-
-// gaugeChart(personID) {
-//     var metaData = jsonData.metadata.filter((sample) => sample.id === parseInt(personID))[0];
-    
-//     //navigate into json, access wfreq and plug it in to chart
-//     var wfeq = metadata.wfreq;
-//     console.log(wfeq)
-
-//     var data = [
-//         {
-//             domain: { x: [0, 1], y: [0, 1] },
-//             value: 270,
-//             title: { text: "Speed" },
-//             type: "indicator",
-//             mode: "gauge+number"
-//         }
-//     ];
-
-//     var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
-//     Plotly.newPlot('gauge', data, layout);
-// }
 
 
 
