@@ -134,16 +134,16 @@ function gaugeChart(personID) {
             title: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week",
             gauge: {
                 axis: { range: [null, 9], tickwidth: 1, tickcolor: "red" },
-                bar: { color: "#ff8080" },
+                bar: { color: "#3366cc" },
                 bgcolor: "white",
                 borderwidth: 2,
                 bordercolor: "gray",
                 steps: [
-                    { range: [0, 2], color: "#ffc299" },
-                    { range: [2,4], color: "#ffb380" },
-                    { range: [4,6], color: "#ffa366" },
-                    { range: [6,8], color: "#ff944d" },
-                    { range: [8,9], color: "#ff8533" }
+                    { range: [0, 2], color: "#66c2ff" },
+                    { range: [2,4], color: "#4db8ff" },
+                    { range: [4,6], color: "#33adff" },
+                    { range: [6,8], color: "#1aa3ff" },
+                    { range: [8,9], color: "#0099ff" }
                 ],
             }
         }
