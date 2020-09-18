@@ -180,25 +180,7 @@ function gaugeChart(personID) {
         height: 400,
         font: { color: "black", family: "Arial" }
     };
-    
+
+    //plot gauge
     Plotly.newPlot('gauge', data, layout);
 }
-
-
-
-
-
-
-
-
-
-//chart function
-//bubble chart function
-//metadata function
-
-
-
-
-
-
-
