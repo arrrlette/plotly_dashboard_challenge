@@ -19,15 +19,16 @@ function init() {
 
 function optionChanged(personID) {
 
+    demographics(personID);
     barChart(personID);
     bubbleChart(personID);
-    demographics(personID);
-    //gaugeChart(personID);
+    gaugeChart(personID);
 };
 
 function demographics(personID) {
 
     var metaData = jsonData.metadata.filter((sample) => sample.id === parseInt(personID))[0];
+    //console.log(metaData)
 
     var demoHTML = d3.select("#sample-metadata");
     demoHTML.html("")
@@ -95,7 +96,7 @@ function bubbleChart(personID) {
     var trace1 = {
         x: otuIDs,
         y: sampleValues,
-        text: sampleLables,
+        text: sampleLabels,
         mode: 'markers',
         marker: {
             color: otuIDs,
@@ -120,20 +121,36 @@ function bubbleChart(personID) {
 function gaugeChart(personID) {
     var metaData = jsonData.metadata.filter((sample) => sample.id === parseInt(personID))[0];
     // navigate into json, access wfreq and plug it in to chart
-    // var wfeq = metadata.wfreq;
-    // console.log(wfeq)
+    var wfreq = metaData.wfreq;
+    console.log(wfreq);
 
-    // var data = [
-    //     {
-    //         domain: { x: [0, 1], y: [0, 1] },
-    //         value: 270,
-    //         title: { text: "Speed" },
-    //         type: "indicator",
-    //         mode: "gauge+number"
-    //     }
-    // ];
+    var data = [
+        {
+            domain: { x: [0, 1], y: [0, 1] },
+            value: wfreq,
+            title: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week",
+            type: "indicator",
+            mode: "gauge+number",
+            gauge: {
+                bar: {color: "#ff6666"},
+            // steps: [
+            //     {range: [0-2], color: "blue"},
+            //     {range: [2-4], color: "orange"},
+            //     {range: [4-6], color: "green"},
+            //     {range: [6,8], color: "blue"},
+            //     {range: [8,9], color: "pink"},
+            // ]
 
-    // var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+            }
+        }
+    ];
+
+    var layout = { 
+        width: 600, 
+        height: 500, 
+        margin: { t: 0, b: 0 } 
+    };
+
     Plotly.newPlot('gauge', data, layout);
 }
 
