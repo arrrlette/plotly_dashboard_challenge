@@ -154,40 +154,7 @@ function gaugeChart(personID) {
         height: 400,
         font: { color: "black", family: "Arial" }
     };
-
-
-
-
-
-
-
-    // var data = [
-    //     {
-    //         domain: { x: [0, 1], y: [0, 1] },
-    //         value: wfreq,
-    //         title: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week",
-    //         type: "indicator",
-    //         mode: "gauge+number",
-    //         gauge: {
-    //             bar: {color: "#ffc299"},
-    //         // steps: [
-    //         //     {range: [0-2], color: "blue"},
-    //         //     {range: [2-4], color: "orange"},
-    //         //     {range: [4-6], color: "green"},
-    //         //     {range: [6,8], color: "blue"},
-    //         //     {range: [8,9], color: "pink"},
-    //         // ]
-
-    //         }
-    //     }
-    // ];
-
-    // var layout = { 
-    //     width: 600, 
-    //     height: 500, 
-    //     margin: { t: 0, b: 0 } 
-    // };
-
+    
     Plotly.newPlot('gauge', data, layout);
 }
 
