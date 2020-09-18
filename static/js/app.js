@@ -36,7 +36,7 @@ function demographics(personID) {
 
     //saving json metadata for selected ID into a variable
     var metaData = jsonData.metadata.filter((obj) => obj.id === parseInt(personID))[0];
-    console.log(metaData)
+    //console.log(metaData)
 
     //select html
     var demoHTML = d3.select("#sample-metadata");
