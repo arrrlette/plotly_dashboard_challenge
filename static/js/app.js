@@ -12,10 +12,15 @@ d3.json(jsonLink).then((data) => {
 function init() {
     //select html
     var dropDown = d3.select('#selDataset');
-    console.log(jsonData);
+
+    //console.log(jsonData);
+
+    //add ID's to drop down
     jsonData.names.forEach((name) => {
         dropDown.append('option').text(name).property('value', name);
     })
+
+    //function to call chart options. added index [0] to display 940's data on initial download
     optionChanged(jsonData.names[0]) //to display graphics for 940 on init load
 };
 
@@ -29,20 +34,23 @@ function optionChanged(personID) {
 
 function demographics(personID) {
 
+    //saving json metadata for selected ID into a variable
     var metaData = jsonData.metadata.filter((sample) => sample.id === parseInt(personID))[0];
     //console.log(metaData)
 
+    //select html
     var demoHTML = d3.select("#sample-metadata");
+    //to only show current data called
     demoHTML.html("")
+    //appends each key and value in the metaData to the html
     Object.entries(metaData).forEach(([key, value]) => demoHTML.append("h4").text(`${key}: ${value}`));
 
 }
 
 function barChart(personID) {
 
+    //saving json sample data for selected ID into a variable
     var sampleData = jsonData.samples.filter(obj => obj.id.toString() === personID)[0];
-
-    //console.log(metaData);
     //console.log(sampleData);
 
     //grabbing top 10 OTU IDs for chosen personID
@@ -70,28 +78,37 @@ function barChart(personID) {
         orientation: "h"
     };
 
+    var layout = {
+        title: "<b>Top Ten OTUs Found</b>",
+        xaxis: {
+            title: 'OTU IDs'
+        },
+        yaxis: {
+            title: 'Sample Values'
+        }
+    }
+
     var barData = [trace1];
 
-    Plotly.newPlot("bar", barData)
+    //plot bar graph
+    Plotly.newPlot("bar", barData, layout)
 };
 
 
 function bubbleChart(personID) {
 
-    //var metaData = jsonData.metadata.filter((sample) => sample.id === parseInt(personID))[0];
+    //saving json sample data for selected ID into a variable
     var sampleData = jsonData.samples.filter(obj => obj.id.toString() === personID)[0];
 
-    //wont need to slice by 10 here since showing all
-
-    //grabbing top 10 OTU IDs for chosen personID
+    //grabbing all OTU IDs for chosen personID
     var otuIDs = sampleData.otu_ids;
     //console.log(otuIDs)
 
-    //grabbing top 10 OTU sample values for chosen personID
+    //grabbing all OTU sample values for chosen personID
     var sampleValues = sampleData.sample_values; //used for x axis
     //console.log(sampleValues)
 
-    //grabbing top 10 OTU sample labels for chosen personID
+    //grabbing all OTU sample labels for chosen personID
     var sampleLabels = sampleData.otu_labels;
     //console.log(sampleLabels);
 
@@ -102,9 +119,8 @@ function bubbleChart(personID) {
         mode: 'markers',
         marker: {
             color: otuIDs,
-            // opacity: [1, 0.8, 0.6, 0.4],
-            size: sampleValues
-
+            size: sampleValues,
+            colorscale: 'Greens'
         }
     };
 
@@ -114,17 +130,27 @@ function bubbleChart(personID) {
         // title: 'Marker Size and Color',
         showlegend: false,
         height: 500,
-        width: 1200
+        width: 1200,
+        title: "<b>Belly Button Bacteria</b>",
+        xaxis: {
+            title: 'OTU IDs'
+        },
+        yaxis: {
+            title: 'Sample Values'
+        }
     };
 
+    //plot bubble graph
     Plotly.newPlot('bubble', data, layout);
 };
 
 function gaugeChart(personID) {
+
+    //saving json metadata for selected ID into a variable
     var metaData = jsonData.metadata.filter((sample) => sample.id === parseInt(personID))[0];
     // navigate into json, access wfreq and plug it in to chart
     var wfreq = metaData.wfreq;
-    console.log(wfreq);
+    //console.log(wfreq);
 
     var data = [
         {
