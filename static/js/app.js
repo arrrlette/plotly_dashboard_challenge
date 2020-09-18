@@ -43,7 +43,7 @@ function demographics(personID) {
     //to only show current data called
     demoHTML.html("")
     //appends each key and value in the metaData to the html
-    Object.entries(metaData).forEach(([key, value]) => demoHTML.append("h4").text(`${key}: ${value}`));
+    Object.entries(metaData).forEach(([key, value]) => demoHTML.append("h6").text(`${key}: ${value}`));
 
 }
 
