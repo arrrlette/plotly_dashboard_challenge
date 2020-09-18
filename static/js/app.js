@@ -35,8 +35,8 @@ function optionChanged(personID) {
 function demographics(personID) {
 
     //saving json metadata for selected ID into a variable
-    var metaData = jsonData.metadata.filter((sample) => sample.id === parseInt(personID))[0];
-    //console.log(metaData)
+    var metaData = jsonData.metadata.filter((obj) => obj.id === parseInt(personID))[0];
+    console.log(metaData)
 
     //select html
     var demoHTML = d3.select("#sample-metadata");
@@ -58,7 +58,7 @@ function barChart(personID) {
     //console.log(topTenOTU)
 
     //add OTU to ID on y axis
-    var otuIDs = topTenOTU.map(x => "OTU " + x);
+    var otuIDs = topTenOTU.map(x => "OTU " + x); //also converts from numeric to string (else OTU ID's would remain a numeric value)
 
     //grabbing top 10 OTU sample values for chosen personID
     var sampleValues = sampleData.sample_values.slice(0, 10).reverse(); //used for x axis
